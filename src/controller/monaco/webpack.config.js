@@ -2,6 +2,9 @@ var path = require('path');
 var webpack = require("webpack");
 const sourcePath = __dirname + '/src';
 const destinationPath = __dirname + '/dist';
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const outputDir = "./dist/";
 
 var config = module.exports = {
 	context: sourcePath,
@@ -12,7 +15,7 @@ var config = module.exports = {
 		app: ["./main.js"]
 	},
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, outputDir),
     	filename: 'monacontroller.min.js',
     	publicPath: '/'
 	},
@@ -65,4 +68,13 @@ var config = module.exports = {
 		    }
 		]
 	},
+	plugins: [
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1
+        }),
+		new CleanWebpackPlugin({outputDir}),
+		new MonacoWebpackPlugin({
+		  languages: ['javascript', 'typescript', 'handlebars', 'html', 'css']
+		})
+	]
 };
