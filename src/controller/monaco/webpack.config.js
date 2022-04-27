@@ -3,7 +3,7 @@ var webpack = require("webpack");
 const sourcePath = __dirname + '/src';
 const destinationPath = __dirname + '/dist';
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-esm-webpack-plugin');
 const outputDir = "./dist/";
 
 var config = module.exports = {
@@ -17,7 +17,7 @@ var config = module.exports = {
 	output: {
 		path: path.resolve(__dirname, outputDir),
     	filename: 'monacontroller.min.js',
-    	publicPath: '/'
+    	publicPath: '/',
 	},
 	module:{
 		rules:[

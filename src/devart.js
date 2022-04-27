@@ -2,23 +2,13 @@ devart=(function(global,factory){
 	let conteditor;
 	let nomcont="";
 	let value;
-	let editor;
-	function getEditor(options){
-		if(options.language!=''){
-			language=options.language;
+	let editorInt;
+	let editorGlobal;
+	function getEditor(editor){
+		if(typeof editor !== 'string'){
+			editorInt=editor;
+			return editor;
 		}
-		else{
-			language="javascript";
-			genrl.warn("Debe establecer un language para el editor");
-		}
-		if(options.value!=''){
-			internvalue=options.value;
-		}
-		else{
-			internvalue="";
-			genrl.warn("Debe establecer un contenedor para el editor");
-		}
-		return editor;
 	}
 	function setEvent(event){
 		if(options.language!=''){
@@ -38,8 +28,10 @@ devart=(function(global,factory){
 		return editor;
 	}
   	return{
-  		run:function(options){
-
+  		run:function(editor){
+			if(typeof editor !== 'string'){
+				editorGlobal=getEditor(editor);
+			}
   		},
   		event:function(options){
 
